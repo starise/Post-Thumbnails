@@ -24,7 +24,6 @@ Author URI: http://stari.se
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 if (!class_exists('PostThumbnails')) {
 
 	class PostThumbnails {
@@ -39,15 +38,12 @@ if (!class_exists('PostThumbnails')) {
 		 * Required $args contents:
 		 *
 		 * label - The name of the post thumbnail to display in the admin metabox
-		 *
 		 * id - Used to build the CSS class for the admin meta box. Needs to be unique and valid in a CSS class selector.
 		 *
 		 * Optional $args contents:
 		 *
-		 * post_type - The post type to register this thumbnail for. Defaults to post.
-		 *
+		 * post_type - Array of post types to register this thumbnail for. Defaults to post.
 		 * priority - The admin metabox priority. Defaults to 'low'.
-		 *
 		 * context - The admin metabox context. Defaults to 'side'.
 		 *
 		 * @param array|string $args See above description.
@@ -94,7 +90,7 @@ if (!class_exists('PostThumbnails')) {
 		}
 
 		/**
-		 * get the meta key used to store a post's thumbnail
+		 * Get the meta key used to store a post's thumbnail
 		 *
 		 * @return string
 		 */
@@ -320,11 +316,12 @@ if (!class_exists('PostThumbnails')) {
 		}
 
 		/**
+		 * Get the URL of the thumbnail.
 		 *
 		 * @param string $id The id used to register the thumbnail.
 		 * @param int $post_id Optional. The post ID. If not set, will attempt to get it.
 		 * @param string $size Optional. The thumbnail size to use. If set, use wp_get_attachment_image_src() instead of wp_get_attachment_url()
-		 * @return mixed Thumbnail url or false if the post doesn't have a thumbnail for the given post type, and id.
+		 * @return mixed Thumbnail url or false if the post doesn't have a thumbnail for the given ID.
 		 */
 		public static function get_post_thumbnail_url($id, $post_id = 0, $size = null) {
 			if (!$post_id) {
