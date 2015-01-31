@@ -187,7 +187,7 @@ if (!class_exists('PostThumbnails')) {
 		 * multiple post thumbnail is deleted from the Media Libray
 		 *
 		 * @global object $wpdb
-		 * @param int $post_id
+		 * @param int     $post_id
 		 */
 		public function action_delete_attachment($post_id) {
 			global $wpdb;
@@ -200,7 +200,7 @@ if (!class_exists('PostThumbnails')) {
 		 * Filter example: add_filter('pt_unprotect_meta', '__return_true');
 		 *
 		 * @param boolean $protected Passed in from filter
-		 * @param type $meta_key Passed in from filter
+		 * @param type    $meta_key  Passed in from filter
 		 * @return boolean
 		 */
 		public function filter_is_protected_meta($protected, $meta_key) {
@@ -215,7 +215,7 @@ if (!class_exists('PostThumbnails')) {
 		 * Allow the plugin to be in the plugins directory or the theme directory
 		 *
 		 * @param string $relative_path Relative file path to the plugin file to get the URL of
-		 * @param string $plugin_path Absolute file path to the plugin base directory
+		 * @param string $plugin_path   Absolute file path to the plugin base directory
 		 * @return string the URL of the plugin file
 		 */
 		private function plugins_url($relative_path, $plugin_path) {
@@ -243,8 +243,8 @@ if (!class_exists('PostThumbnails')) {
 		/**
 		 * Check if post has an image attached.
 		 *
-		 * @param string $id The id used to register the thumbnail.
-		 * @param string $post_id Optional. Post ID.
+		 * @param  string $id      The id used to register the thumbnail.
+		 * @param  string $post_id Optional. Post ID.
 		 * @return bool Whether post has an image attached.
 		 */
 		public static function has_post_thumbnail($id, $post_id = null) {
@@ -263,25 +263,25 @@ if (!class_exists('PostThumbnails')) {
 		 * Display Post Thumbnail.
 		 *
 		 * @param string $thumb_id The id used to register the thumbnail.
-		 * @param string $post_id Optional. Post ID.
-		 * @param int $size Optional. Image size.  Defaults to 'post-thumbnail', which theme sets using set_post_thumbnail_size( $width, $height, $crop_flag );.
-		 * @param string|array $attr Optional. Query string or array of attributes.
-		 * @param bool $link_to_original Optional. Wrap link to original image around thumbnail?
+		 * @param int    $post_id  Optional. Post ID.
+		 * @param string $size     Optional. Image size.  Defaults to 'post-thumbnail'.
+		 * @param mixed  $attr     Optional. Query string or array of attributes.
+		 * @param bool   $link     Optional. Wrap link to original image around thumbnail?
 		 */
-		public static function the_post_thumbnail($thumb_id, $post_id = null, $size = 'post-thumbnail', $attr = '', $link_to_original = false) {
-			echo self::get_the_post_thumbnail($thumb_id, $post_id, $size, $attr, $link_to_original);
+		public static function the_post_thumbnail($thumb_id, $post_id = null, $size = 'post-thumbnail', $attr = '', $link = false) {
+			echo self::get_the_post_thumbnail($thumb_id, $post_id, $size, $attr, $link);
 		}
 
 		/**
-		 * Retrieve Post Thumbnail.
+		 * Returns an HTML element representing the Post Thumbnail.
 		 *
 		 * @param string $thumb_id The id used to register the thumbnail.
-		 * @param int $post_id Optional. Post ID.
-		 * @param string $size Optional. Image size.  Defaults to 'thumbnail'.
-		 * @param bool $link_to_original Optional. Wrap link to original image around thumbnail?
-		 * @param string|array $attr Optional. Query string or array of attributes.
+		 * @param int    $post_id  Optional. Post ID.
+		 * @param string $size     Optional. Image size.  Defaults to 'thumbnail'.
+		 * @param bool   $link     Optional. Wrap link to original image around thumbnail?
+		 * @param mixed  $attr     Optional. Query string or array of attributes.
 		  */
-		public static function get_the_post_thumbnail($thumb_id, $post_id = NULL, $size = 'post-thumbnail', $attr = '' , $link_to_original = false) {
+		public static function get_the_post_thumbnail($thumb_id, $post_id = NULL, $size = 'post-thumbnail', $attr = '' , $link = false) {
 			global $id;
 			$post_id = (NULL === $post_id) ? get_the_ID() : $post_id;
 			$post_thumbnail_id = self::get_post_thumbnail_id($thumb_id, $post_id);
@@ -294,7 +294,7 @@ if (!class_exists('PostThumbnails')) {
 				$html = '';
 			}
 
-			if ($link_to_original && $html) {
+			if ($link && $html) {
 				$html = sprintf('<a href="%s">%s</a>', wp_get_attachment_url($post_thumbnail_id), $html);
 			}
 
@@ -304,23 +304,23 @@ if (!class_exists('PostThumbnails')) {
 		/**
 		 * Retrieve Post Thumbnail ID.
 		 *
-		 * @param string $id The id used to register the thumbnail.
-		 * @param int $post_id Post ID.
+		 * @param string $thumb_id The id used to register the thumbnail.
+		 * @param int    $post_id  Post ID.
 		 * @return int
 		 */
-		public static function get_post_thumbnail_id($id, $post_id) {
+		public static function get_post_thumbnail_id($thumb_id, $post_id) {
 			return get_post_meta($post_id, "_{$id}_thumbnail_id", true);
 		}
 
 		/**
 		 * Get the URL of the thumbnail.
 		 *
-		 * @param string $id The id used to register the thumbnail.
-		 * @param int $post_id Optional. The post ID. If not set, will attempt to get it.
-		 * @param string $size Optional. The thumbnail size to use. If set, use wp_get_attachment_image_src() instead of wp_get_attachment_url()
+		 * @param string $thumb_id The id used to register the thumbnail.
+		 * @param int    $post_id  Optional. The post ID. If not set, will attempt to get it.
+		 * @param string $size     Optional. The thumbnail size to use. If set, use wp_get_attachment_image_src() instead of wp_get_attachment_url()
 		 * @return mixed Thumbnail url or false if the post doesn't have a thumbnail for the given ID.
 		 */
-		public static function get_post_thumbnail_url($id, $post_id = 0, $size = null) {
+		public static function get_post_thumbnail_url($thumb_id, $post_id = 0, $size = null) {
 			if (!$post_id) {
 				$post_id = get_the_ID();
 			}
@@ -423,13 +423,13 @@ if (!class_exists('PostThumbnails')) {
 		/**
 		 * set thumbnail meta
 		 *
-		 * @param int $post_ID
-		 * @param string $thumbnail_id ID used to register the thumbnail
-		 * @param int $thumbnail_post_id ID of the attachment to use as the thumbnail
-		 * @return bool result of update_post_meta
+		 * @param int    $post_ID
+		 * @param string $thumb_id      ID used to register the thumbnail
+		 * @param int    $thumb_post_id ID of the attachment to use as the thumbnail
+		 * @return bool  Result of update_post_meta
 		 */
-		public static function set_meta($post_ID, $thumbnail_id, $thumbnail_post_id) {
-			return update_post_meta($post_ID, "_{$thumbnail_id}_thumbnail_id", $thumbnail_post_id);
+		public static function set_meta($post_ID, $thumb_id, $thumb_post_id) {
+			return update_post_meta($post_ID, "_{$thumb_id}_thumbnail_id", $thumb_post_id);
 		}
 
 	}
