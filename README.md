@@ -23,7 +23,7 @@ if (class_exists('PostThumbnails')) {
 }
 ```
 
-The template tag `PostThumbnails::the_post_thumbnail` is similar to WordPress' `the_post_thumbnail` but it displays your custom thumbnail in a post loop. It accepts the following arguments:
+The template tag `PostThumbnails::the_post_thumbnail` is similar to WordPress' `the_post_thumbnail` but it displays your custom thumbnail in a post loop:
 
 ```php
 <?php if (class_exists('PostThumbnails')) :
