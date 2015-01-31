@@ -31,4 +31,4 @@ The template tag `PostThumbnails::the_post_thumbnail` is similar to WordPress' `
 endif; ?>
 ```
 
-For more details please [check out the wiki](https://github.com/starise/PostThumbnails/wiki)
+For more details please [check out the wiki](https://github.com/starise/Post-Thumbnails/wiki)
