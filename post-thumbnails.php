@@ -196,26 +196,23 @@ if (!class_exists('PostThumbnails')) {
 		}
 
 		/**
-		 * make the meta for storing thumbnails protected so it doesn't show in the Custom Fields metabox
+		 * Unprotect post thumbnails so they can be shown in Custom Fields metabox
+		 * Filter example: add_filter('pt_unprotect_meta', '__return_true');
 		 *
 		 * @param boolean $protected Passed in from filter
 		 * @param type $meta_key Passed in from filter
 		 * @return boolean
 		 */
 		public function filter_is_protected_meta($protected, $meta_key) {
-			if (apply_filters('mpt_unprotect_meta', false)) {
-				return $protected;
-			}
-
-			if ($meta_key == $this->get_meta_key()) {
-				$protected = true;
+			if ($meta_key == $this->get_meta_key() && apply_filters('pt_unprotect_meta', false)) {
+				$protected = false;
 			}
 
 			return $protected;
 		}
 
 		/**
-		 * allow the plugin to be in the plugins directory or the theme directory
+		 * Allow the plugin to be in the plugins directory or the theme directory
 		 *
 		 * @param string $relative_path Relative file path to the plugin file to get the URL of
 		 * @param string $plugin_path Absolute file path to the plugin base directory
