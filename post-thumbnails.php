@@ -2,7 +2,7 @@
 /*
 Plugin Name: Post Thumbnails
 Description: Enable multiple post thumbnails for post type.
-Version: 2.0.0
+Version: 2.2.0
 Author: starise
 Author URI: http://stari.se
 */
