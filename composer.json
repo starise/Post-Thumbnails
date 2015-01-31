@@ -1,0 +1,24 @@
+{
+  "name": "starise/post-thumbnails",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0",
+  "description": "PostThumbnails Class for Wordpress. Enables multiple post thumbnails for post type.",
+  "homepage": "https://github.com/starise/Post-Thumbnails",
+  "authors": [
+    {
+      "name": "Andrea Brandi",
+      "email": "info@andreabrandi.com",
+      "homepage": "https://github.com/starise"
+    }
+  ],
+  "keywords": [
+    "wordpress"
+  ],
+  "support": {
+    "issues": "https://github.com/starise/Post-Thumbnails/issues"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "composer/installers": "~1.0"
+  }
+}
