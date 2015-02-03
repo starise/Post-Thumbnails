@@ -243,11 +243,11 @@ if (!class_exists('PostThumbnails')) {
 		/**
 		 * Check if post has an image attached.
 		 *
-		 * @param  string $id      The id used to register the thumbnail.
-		 * @param  string $post_id Optional. Post ID.
+		 * @param  string $thumb_id The id used to register the thumbnail.
+		 * @param  string $post_id  Optional. Post ID.
 		 * @return bool Whether post has an image attached.
 		 */
-		public static function has_post_thumbnail($id, $post_id = null) {
+		public static function has_post_thumbnail($thumb_id, $post_id = null) {
 			if (null === $post_id) {
 				$post_id = get_the_ID();
 			}
@@ -256,7 +256,7 @@ if (!class_exists('PostThumbnails')) {
 				return false;
 			}
 
-			return get_post_meta($post_id, "_{$id}_thumbnail_id", true);
+			return get_post_meta($post_id, "_{$thumb_id}_thumbnail_id", true);
 		}
 
 		/**
@@ -309,7 +309,7 @@ if (!class_exists('PostThumbnails')) {
 		 * @return int
 		 */
 		public static function get_post_thumbnail_id($thumb_id, $post_id) {
-			return get_post_meta($post_id, "_{$id}_thumbnail_id", true);
+			return get_post_meta($post_id, "_{$thumb_id}_thumbnail_id", true);
 		}
 
 		/**
@@ -325,7 +325,7 @@ if (!class_exists('PostThumbnails')) {
 				$post_id = get_the_ID();
 			}
 
-			$post_thumbnail_id = self::get_post_thumbnail_id($id, $post_id);
+			$post_thumbnail_id = self::get_post_thumbnail_id($thumb_id, $post_id);
 
 			if ($size) {
 				if ($url = wp_get_attachment_image_src($post_thumbnail_id, $size)) {
