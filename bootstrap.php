@@ -24,17 +24,30 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-namespace starise;
-
 define( 'PT_PATH', plugin_dir_path(__FILE__) );
 define( 'PT_URL', plugins_url( DIRECTORY_SEPARATOR, __FILE__ ) );
 
-function loadPostThumbnails()
+class PtAutoloader
 {
-	$src = 'src';
-	$baseDir  = str_replace( '\\', DIRECTORY_SEPARATOR, __NAMESPACE__ ) . DIRECTORY_SEPARATOR;
-	$loadPath = PT_PATH . $src . DIRECTORY_SEPARATOR . $baseDir;
+	const BASENAME = 'starise';
+	const BASESRC = 'src';
 
-	require_once( $loadPath . 'PostThumbnails.php' );
+	/**
+	 * Static loader method
+	 * @param string $class
+	 */
+	public static function load( $class ) {
+		if ( self::BASENAME == substr( $class, 0, 7 ) ) {
+			$classPath = str_replace( '\\', DIRECTORY_SEPARATOR, $class );
+			require_once PT_PATH . self::BASESRC . DIRECTORY_SEPARATOR . $classPath . '.php';
+		}
+	}
 }
-add_action('plugins_loaded', __NAMESPACE__ . '\\loadPostThumbnails');
+
+/**
+ * The autoload-stack could be inactive so the function will return false
+ */
+if ( in_array( '__autoload', (array) spl_autoload_functions() ) ) {
+	spl_autoload_register( '__autoload' );
+}
+spl_autoload_register( array( 'PtAutoloader', 'load' ) );
