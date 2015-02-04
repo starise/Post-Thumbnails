@@ -1,6 +1,6 @@
 <?php
 
-namespace starise\Plugins;
+namespace starise;
 
 class PostThumbnails
 {
@@ -245,7 +245,6 @@ class PostThumbnails
 	  */
 	public static function get_the_post_thumbnail($thumb_id, $post_id = NULL, $size = 'post-thumbnail', $attr = '' , $link = false)
 	{
-		global $id;
 		$post_id = (NULL === $post_id) ? get_the_ID() : $post_id;
 		$post_thumbnail_id = self::get_post_thumbnail_id($thumb_id, $post_id);
 		$size = apply_filters("_{$thumb_id}_thumbnail_size", $size);

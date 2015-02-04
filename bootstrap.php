@@ -24,7 +24,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-namespace starise\Plugins;
+namespace starise;
 
 define( 'PT_PATH', plugin_dir_path(__FILE__) );
 define( 'PT_URL', plugins_url( DIRECTORY_SEPARATOR, __FILE__ ) );
