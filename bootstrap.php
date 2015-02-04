@@ -29,7 +29,7 @@ namespace starise;
 define( 'PT_PATH', plugin_dir_path(__FILE__) );
 define( 'PT_URL', plugins_url( DIRECTORY_SEPARATOR, __FILE__ ) );
 
-function load_modules()
+function loadPostThumbnails()
 {
 	$src = 'src';
 	$baseDir  = str_replace( '\\', DIRECTORY_SEPARATOR, __NAMESPACE__ ) . DIRECTORY_SEPARATOR;
@@ -37,4 +37,4 @@ function load_modules()
 
 	require_once( $loadPath . 'PostThumbnails.php' );
 }
-add_action('plugins_loaded', __NAMESPACE__ . '\\load_modules');
+add_action('plugins_loaded', __NAMESPACE__ . '\\loadPostThumbnails');
