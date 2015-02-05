@@ -50,4 +50,4 @@ class PtAutoloader
 if ( in_array( '__autoload', (array) spl_autoload_functions() ) ) {
 	spl_autoload_register( '__autoload' );
 }
-spl_autoload_register( array( 'PtAutoloader', 'load' ) );
+spl_autoload_register( [ 'PtAutoloader', 'load' ] );

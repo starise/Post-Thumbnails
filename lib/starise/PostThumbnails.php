@@ -6,7 +6,7 @@ class PostThumbnails
 {
 	const LANG_DOMAIN = 'post-thumbnails';
 
-	public function __construct($args = array())
+	public function __construct($args = [])
 	{
 		$this->load_language( self::LANG_DOMAIN );
 		$this->register( $args );
@@ -29,17 +29,17 @@ class PostThumbnails
 	 * @param array|string $args See above description.
 	 * @return void
 	 */
-	public function register($args = array())
+	public function register($args = [])
 	{
 		global $wp_version;
 
-		$defaults = array(
+		$defaults = [
 			'label' => null,
 			'id' => null,
 			'post_type' => ['post'],
 			'priority' => 'low',
 			'context' => 'side',
-		);
+		];
 
 		$args = wp_parse_args($args, $defaults);
 
@@ -61,13 +61,13 @@ class PostThumbnails
 			add_theme_support( 'post-thumbnails' );
 		}
 
-		add_action('add_meta_boxes', array($this, 'add_metabox'));
-		add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
-		add_action('admin_print_scripts-post.php', array($this, 'admin_header_scripts'));
-		add_action('admin_print_scripts-post-new.php', array($this, 'admin_header_scripts'));
-		add_action("wp_ajax_set-{$this->id}-thumbnail", array($this, 'set_thumbnail'));
-		add_action('delete_attachment', array($this, 'action_delete_attachment'));
-		add_filter('is_protected_meta', array($this, 'filter_is_protected_meta'), 20, 2);
+		add_action('add_meta_boxes', [$this, 'add_metabox']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
+		add_action('admin_print_scripts-post.php', [$this, 'admin_header_scripts']);
+		add_action('admin_print_scripts-post-new.php', [$this, 'admin_header_scripts']);
+		add_action("wp_ajax_set-{$this->id}-thumbnail", [$this, 'set_thumbnail']);
+		add_action('delete_attachment', [$this, 'action_delete_attachment']);
+		add_filter('is_protected_meta', [$this, 'filter_is_protected_meta'], 20, 2);
 	}
 
 	/**
@@ -88,7 +88,7 @@ class PostThumbnails
 	public function add_metabox()
 	{
 		foreach ($this->post_type as $post_type) {
-			add_meta_box("{$this->id}", __($this->label, self::LANG_DOMAIN), array($this, 'thumbnail_meta_box'), $post_type, $this->context, $this->priority);
+			add_meta_box("{$this->id}", __($this->label, self::LANG_DOMAIN), [$this, 'thumbnail_meta_box'], $post_type, $this->context, $this->priority);
 		}
 	}
 
@@ -137,10 +137,11 @@ class PostThumbnails
 
 		$ajax_nonce = wp_create_nonce("set_post_thumbnail-{$this->id}-{$calling_post_id}");
 		$link = sprintf('<a id="%1$s-thumbnail-%2$s" class="%1$s-thumbnail" href="#" onclick="PostThumbnails.setAsThumbnail(\'%2$s\', \'%1$s\', \'%4$s\');return false;">' . __( 'Set as %3$s', self::LANG_DOMAIN ) . '</a>', $this->id, $post->ID, $this->label, $ajax_nonce);
-		$form_fields["{$this->id}-thumbnail"] = array(
+		$form_fields["{$this->id}-thumbnail"] = [
 			'label' => $this->label,
 			'input' => 'html',
-			'html' => $link);
+			'html' => $link
+		];
 		return $form_fields;
 	}
 
@@ -154,12 +155,12 @@ class PostThumbnails
 		global $wp_version, $post_ID;
 
 		// only load on select pages
-		if ( ! in_array( $hook, array( 'post-new.php', 'post.php', 'media-upload-popup' ) ) )
+		if ( ! in_array( $hook, ['post-new.php', 'post.php', 'media-upload-popup'] ) )
 			return;
 
-		wp_enqueue_media( array( 'post' => ( $post_ID ? $post_ID : null ) ) );
-		wp_enqueue_script( "pt-featured-image", PT_URL . 'js' . DIRECTORY_SEPARATOR . 'post-thumbnails-admin.js', array( 'jquery', 'set-post-thumbnail' ) );
-		wp_enqueue_script( "pt-featured-image-modal", PT_URL . 'js' . DIRECTORY_SEPARATOR . 'media-modal.js', array( 'jquery', 'media-models' ) );
+		wp_enqueue_media( [ 'post' => ( $post_ID ? $post_ID : null ) ] );
+		wp_enqueue_script( "pt-featured-image", PT_URL . 'js' . DIRECTORY_SEPARATOR . 'post-thumbnails-admin.js', [ 'jquery', 'set-post-thumbnail' ] );
+		wp_enqueue_script( "pt-featured-image-modal", PT_URL . 'js' . DIRECTORY_SEPARATOR . 'media-modal.js', [ 'jquery', 'media-models' ] );
 		wp_enqueue_style( "pt-admin-css", PT_URL . 'css' . DIRECTORY_SEPARATOR . 'post-thumbnails-admin.css' );
 	}
 
@@ -334,10 +335,10 @@ class PostThumbnails
 		if ($thumbnail_id && get_post($thumbnail_id)) {
 			$old_content_width = $content_width;
 			$content_width = 266;
-			$attr = array( 'class' => 'post-thumbnails' );
+			$attr = [ 'class' => 'post-thumbnails' ];
 
 			if ( !isset($_wp_additional_image_sizes["{$this->id}-thumbnail"])) {
-					$thumbnail_html = wp_get_attachment_image( $thumbnail_id, array($content_width, $content_width), false, $attr );
+					$thumbnail_html = wp_get_attachment_image( $thumbnail_id, [$content_width, $content_width], false, $attr );
 			} else {
 					$thumbnail_html = wp_get_attachment_image( $thumbnail_id, "{$this->id}-thumbnail", false, $attr );
 			}
