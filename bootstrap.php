@@ -8,7 +8,7 @@
  */
 
 /*  Copyright 2010 Chris Scott (cscott@voceconnect.com)
-    Copyright 2014 Andrea Brandi (info@andreabrandi.com)
+    Copyright 2014-2015 Andrea Brandi (info@andreabrandi.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
