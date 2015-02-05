@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlaceHolder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-31 05:56+0100\n"
-"PO-Revision-Date: 2015-01-31 05:56+0100\n"
+"POT-Creation-Date: 2015-02-05 13:48+0100\n"
+"PO-Revision-Date: 2015-02-05 13:48+0100\n"
 "Last-Translator: Andrea Brandi <info@andreabrandi.com>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -18,15 +18,15 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: post-thumbnails.php:77
+#: lib/starise/PostThumbnails.php:54
 #, php-format
 msgid ""
 "The 'label' and 'id' values of the 'args' parameter of '%s::%s()' are "
 "required"
 msgstr ""
-"I valori 'label' e 'id' del parametro 'args' di '%s::%s()' are required"
+"I valori 'label' e 'id' usati come argomenti di '%s::%s()' sono obbligatori"
 
-#: post-thumbnails.php:158
+#: lib/starise/PostThumbnails.php:139
 #, php-format
 msgid "Set as %3$s"
 msgstr "Imposta come %3$s"
