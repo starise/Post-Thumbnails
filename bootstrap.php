@@ -30,7 +30,7 @@ define( 'PT_URL', plugins_url( DIRECTORY_SEPARATOR, __FILE__ ) );
 class PtAutoloader
 {
 	const BASENAME = 'starise';
-	const BASESRC = 'src';
+	const BASESRC = 'lib';
 
 	/**
 	 * Static loader method
